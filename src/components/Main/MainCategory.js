@@ -6,33 +6,33 @@ const type = [
   {
     key: 0,
     label: '액션/판타지',
-    lineColor: '#1293e9',
-    color: '#e2f2ff'
+    color: '#0155db',
+    lineColor: '#e2f2ff'
   },
   {
     key: 1,
     label: '공포/스릴러',
-    lineColor: '#db1e1e',
-    color: '#ffeeee'
+    color: '#db1e1e',
+    lineColor: '#ffeeee'
     
   },
   {
     key: 2,
     label: '코미디',
-    lineColor: '#ff8800',
-    color: '#fff1d7'
+    color: '#ffa600',
+    lineColor: '#fff1d7'
   },
   {
     key: 3,
     label: '로맨스',
-    lineColor: '#fd5378',
-    color: '#ffeeee'
+    color: '#ff6b8b',
+    lineColor: '#ffeeee'
   },
   {
     key: 4,
     label: '전쟁',
-    lineColor: '#179217',
-    color: '#eefbee'
+    color: '#1b7979',
+    lineColor: '#eefbee'
   },
 
 ]
@@ -46,24 +46,22 @@ export default function MainCategory() {
       showsHorizontalScrollIndicator={false}
     >
       {
-        type.map((item) => {
-          return (
-            <CateBtn
+        type.map((item) => (
+          <CateBtn
+            key={item.key}
+            style={{
+              elevation: 3,
+              backgroundColor: `${item.color}`,
+            }}
+          >
+            <SmallText
               style={{
-                elevation: 3,
-                backgroundColor: `${item.color}`,
-                borderColor: `${item.lineColor}`,
-                borderWidth: 2
+                color: `${item.lineColor}`
               }}
-            >
-              <SmallText
-                style={{
-                  color: `${item.lineColor}`
-                }}
-                key={item.key}>{item.label}</SmallText>
-            </CateBtn>
-          )})
-        }
+            >{item.label}</SmallText>
+          </CateBtn>
+        ))
+      }
       {/* <CateBtn>
         <SmallText>코미디</SmallText>
       </CateBtn>

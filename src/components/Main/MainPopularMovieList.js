@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function MainMovieList({ item, navigation }) {
+export default function MainPopularMovieList({ item, navigation }) {
   return (
     <Card
-      style={{
-        elevation: 7,
-      }}
       onPress={() => { navigation.navigate('DetailPage', { id: item.id }) }}>
       <Img
         resizeMode='contain'
@@ -24,9 +21,8 @@ const Img = styled.Image`
 `;
 
 const Card = styled.TouchableOpacity`
-  width: 135px;
-  height: 202px;
+  width: 105px;
+  height: 158px;
   margin-right: 10px;
   border-radius: 5px;
-  border: 1px solid #eee;
 `;

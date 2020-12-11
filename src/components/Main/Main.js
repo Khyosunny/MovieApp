@@ -1,19 +1,46 @@
 import React from 'react';
 import { View, Text, FlatList, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
-import FastImage from 'react-native-fast-image'
+import Carousel from 'react-native-snap-carousel';
 
-import MovieList from './MainMovieList';
+import PopularMovieList from './MainPopularMovieList';
 import Category from './MainCategory'
 
-export default function Main({ data, randomItem, navigation }) {
+const renderItem = ({ item, index }) => {
+  return (
+    <View>
+      <Text>{item.title}</Text>
+    </View>
+  )
+}
+
+
+export default function Main({ popularMovieList, nowMovieList, navigation }) {
   return (
     <Container>
+      <Layout>
+        <Carousel
+          data={nowMovieList}
+          renderItem={renderItem}
+          sliderWidth={200}
+          itemWidth={70}
+        />
+      
+
+      </Layout>
+     
+      <Layout>
+        <Row>
+          <Title>카테고리</Title>
+        </Row>
+          <Category />
+      </Layout>
+      
       <Layout>
         <Row>
           <Title>인기 영화</Title>
           <MoreBtn>
-            <MoreText>더보기 〉</MoreText>
+            <MoreText>〉</MoreText>
           </MoreBtn>
         </Row>
         {/* <FlatList
@@ -36,54 +63,11 @@ export default function Main({ data, randomItem, navigation }) {
           showsHorizontalScrollIndicator={false}
         >
           {
-            data.map((item) => (
-              <MovieList key={item.id} item={item} navigation={navigation}/>
+            popularMovieList.map((item) => (
+              <PopularMovieList key={item.id} item={item} navigation={navigation}/>
             ))
           }
         </ScrollView>
-      </Layout>
-     
-      <Layout>
-        <Row>
-          <Title>카테고리</Title>
-        </Row>
-          <Category />
-      </Layout>
-      
-      <Layout>
-        <Row>
-          <Title>추천 영화</Title>
-        </Row>
-        <RandomBox
-          style={{
-            elevation: 2,
-          }}
-          onPress={() => { navigation.navigate('DetailPage', { id: randomItem.id })}}
-        >
-          <RandomImg
-            style={{
-              borderBottomLeftRadius: 20,
-              borderTopLeftRadius: 20
-            }}
-            resizeMode='contain'
-            source={{ uri: `${IMG_URL}${randomItem.poster_path}` }}
-          />
-          <RandomTextBox>
-            <MovieTitle>
-              {randomItem.title}
-            </MovieTitle>
-            <Text
-              style={{
-                color: '#ffa705'
-              }}
-            >★★★★★</Text>
-            <SmallText
-              numberOfLines={4}
-            >
-              {randomItem.overview}
-            </SmallText>
-          </RandomTextBox>
-        </RandomBox>
       </Layout>
 
     </Container>
@@ -105,7 +89,6 @@ const RandomTextBox = styled.View`
 
 const RandomBox = styled.TouchableOpacity`
   flex-direction: row;
-  margin-bottom: 30px;
   margin-right: 10px;
   background-color: #f9f9f9;
   border-radius: 7px;
@@ -114,11 +97,13 @@ const RandomBox = styled.TouchableOpacity`
 const MoreText = styled.Text`
   font-size: 14px;
   line-height: 20px;
+  color: #b9b9b9;
 `;
 
 const MoreBtn = styled.TouchableOpacity`
-  width: 70px;
+  width: 20px;
   height: 20px;
+  background-color: #fff;
 `;
 
 const SmallText = styled.Text`
@@ -133,6 +118,7 @@ const MovieTitle = styled.Text`
 `;
 
 const Title = styled.Text`
+  color: #e9e9e9;
   font-size: 16px;
   font-weight: bold;
 `;
@@ -152,5 +138,5 @@ const Layout = styled.View`
 const Container = styled.ScrollView`
   flex: 1;
   padding-left: 10px;
-  background-color: #f4f4f5;
+  background-color: #171120;
 `;

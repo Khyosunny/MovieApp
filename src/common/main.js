@@ -4,12 +4,13 @@ const GET_DATA = 'main/GET_DATA';
 
 //액션 생성 함수
 export const loadingStart = () => ({ type: LOADING });
-export const getData = data => ({ type: GET_DATA, data });
+export const getData = (popularData, nowPlayingData) => ({ type: GET_DATA, popularData, nowPlayingData});
 
 //초기 스테이트
 const initialState = {
   loading: false,
-  data: []
+  popularMovieList: [],
+  nowMovieList: []
 }
 
 //리듀서
@@ -24,7 +25,8 @@ export default function main(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        data: action.data
+        popularMovieList: action.popularData,
+        nowMovieList: action.nowPlayingData
       }
     default:
       return state;
