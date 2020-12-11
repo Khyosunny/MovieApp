@@ -10,6 +10,8 @@ import api from '../util/api';
 export default function DetailPage({ route, navigation }) {
   const { loading, data } = useSelector(state => state.detail, shallowEqual)
   const { id } = route.params
+
+  console.log('아뒤', id)
   const dispatch = useDispatch();
 
   const fetchData = async () => {

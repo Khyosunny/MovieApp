@@ -1,39 +1,40 @@
 import React from 'react';
-import { View, Text, FlatList, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, FlatList, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
-import Carousel from 'react-native-snap-carousel';
+import Swiper from 'react-native-swiper'
 
 import PopularMovieList from './MainPopularMovieList';
+import NowPlayingMovieList from './MainNowPlayingMovieList';
 import Category from './MainCategory'
 
-const renderItem = ({ item, index }) => {
-  return (
-    <View>
-      <Text>{item.title}</Text>
-    </View>
-  )
-}
+const wWidth = Dimensions.get('window').width
+
 
 
 export default function Main({ popularMovieList, nowMovieList, navigation }) {
   return (
     <Container>
+      <Swiper
+        autoplay={true}
+        containerStyle={{
+          flex: 0
+        }}
+        width={wWidth}
+        height={230}
+        activeDotColor='#c0bfd8'
+        dotColor='rgba(155, 155, 155, 0.329)'
+        paginationStyle={{
+          bottom: 10
+        }}
+      >
+        {
+          nowMovieList.map((item) => (
+            <NowPlayingMovieList key={item.id} item={item} navigation={navigation}/>
+          ))
+        }
+      </Swiper> 
       <Layout>
-        <Carousel
-          data={nowMovieList}
-          renderItem={renderItem}
-          sliderWidth={200}
-          itemWidth={70}
-        />
-      
-
-      </Layout>
-     
-      <Layout>
-        <Row>
-          <Title>카테고리</Title>
-        </Row>
-          <Category />
+        <Category />
       </Layout>
       
       <Layout>
@@ -76,24 +77,6 @@ export default function Main({ popularMovieList, nowMovieList, navigation }) {
 const IMG_URL = 'https://image.tmdb.org/t/p/original'
 
 
-
-const RandomImg = styled.Image`
-  width: 120px;
-  height: 180px;
-`;
-
-const RandomTextBox = styled.View`
-  flex: 1;
-  padding: 10px;
-`;
-
-const RandomBox = styled.TouchableOpacity`
-  flex-direction: row;
-  margin-right: 10px;
-  background-color: #f9f9f9;
-  border-radius: 7px;
-`;
-
 const MoreText = styled.Text`
   font-size: 14px;
   line-height: 20px;
@@ -133,10 +116,10 @@ const Row = styled.View`
 
 const Layout = styled.View`
   margin-top: 30px;
+  padding-left: 10px;
 `;
 
 const Container = styled.ScrollView`
   flex: 1;
-  padding-left: 10px;
-  background-color: #171120;
+  background-color: #15161d;
 `;
