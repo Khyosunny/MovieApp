@@ -1,18 +1,16 @@
-import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
-
+import React from 'react'
+import {ActivityIndicator, View} from 'react-native'
 
 export default function LoadingPage() {
-
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#15161d',
         justifyContent: 'center',
-        alignItems: 'center'
-    }}>
-      <ActivityIndicator size='large' color='#ffa1a1'/>
+        alignItems: 'center',
+      }}>
+      <ActivityIndicator size="large" color="tomato" />
     </View>
   )
 }
