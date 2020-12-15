@@ -5,6 +5,9 @@ async function fetchDetail(id) {
   try {
     const result = await api.get(`${id}`)
     let genre = result.data.genres.map((item) => item.name)
+    if (genre.length > 3) {
+      genre = genre.slice(0, 3)
+    }
     genre = genre.join('/')
     data.genre = genre
     data.title = result.data.title
@@ -12,10 +15,11 @@ async function fetchDetail(id) {
     data.poster_path = result.data.poster_path
     data.backdrop_path = result.data.backdrop_path
     data.release_date = result.data.release_date
+    data.runtime = result.data.runtime
+    data.overview = result.data.overview
   } catch (e) {
     console.log(e)
   }
-  console.log('api', data)
   return data
 }
 // function fetchImg(id) {

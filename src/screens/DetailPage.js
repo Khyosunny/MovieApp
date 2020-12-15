@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch, shallowEqual} from 'react-redux'
 
-import {loadingStart, getData} from '../common/datail'
+import {loadingStart, getData} from '../common/detail'
 import LoadingPage from '../components/Loading/Loading'
 import Detail from '../components/Detail/Detail'
 import fetchData from '../util/detailApi'
@@ -9,7 +9,6 @@ import fetchData from '../util/detailApi'
 export default function DetailPage({route, navigation}) {
   const {loading, data} = useSelector((state) => state.detail, shallowEqual)
 
-  console.log('page', data)
   const {id} = route.params
 
   console.log('아뒤', id)
@@ -32,5 +31,6 @@ export default function DetailPage({route, navigation}) {
     fetchDatas()
   }, [])
 
-  return loading ? <LoadingPage /> : <Detail data={data} />
+  if (loading) return <LoadingPage />
+  return <Detail data={data} loading={loading} navigation={navigation} />
 }
