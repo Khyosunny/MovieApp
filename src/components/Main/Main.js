@@ -55,7 +55,7 @@ export default function Main({popularMovieList, nowMovieList, navigation}) {
         <ScrollView
           horizontal
           scrollEventThrottle={16}
-          snapToInterval={145}
+          snapToInterval={115}
           showsHorizontalScrollIndicator={false}>
           {popularMovieList.map((item) => (
             <PopularMovieList

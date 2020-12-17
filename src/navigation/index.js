@@ -16,15 +16,6 @@ import LikePage from '../screens/LikePage'
 
 const Stack = createStackNavigator()
 
-function StackNavigator() {
-  return (
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen name="MainPage" component={MainPage} />
-      <Stack.Screen name="DetailPage" component={DetailPage} />
-    </Stack.Navigator>
-  )
-}
-
 const Tab = createBottomTabNavigator()
 function TabNavigator() {
   return (
@@ -57,7 +48,7 @@ function TabNavigator() {
           paddingBottom: 5,
         },
       }}>
-      <Tab.Screen name="홈" component={StackNavigator} />
+      <Tab.Screen name="홈" component={MainPage} />
       <Tab.Screen name="영화" component={ListPage} />
       <Tab.Screen name="검색" component={SearchPage} />
       <Tab.Screen name="좋아요" component={LikePage} />
@@ -65,4 +56,12 @@ function TabNavigator() {
   )
 }
 
-export default TabNavigator
+function StackNavigator() {
+  return (
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="MainPage" component={TabNavigator} />
+      <Stack.Screen name="DetailPage" component={DetailPage} />
+    </Stack.Navigator>
+  )
+}
+export default StackNavigator

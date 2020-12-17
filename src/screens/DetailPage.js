@@ -24,13 +24,10 @@ export default function DetailPage({route, navigation}) {
     }
   }
 
-  // let genre = data.genres.map((item) => item.name)
-  // genre = genre.join('/')
-
   useEffect(() => {
     fetchDatas()
   }, [])
 
   if (loading) return <LoadingPage />
-  return <Detail data={data} loading={loading} navigation={navigation} />
+  return <Detail data={data} navigation={navigation} />
 }
