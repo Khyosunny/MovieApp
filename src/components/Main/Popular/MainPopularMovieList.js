@@ -1,9 +1,10 @@
 import React from 'react'
 import {Dimensions, Image} from 'react-native'
 import {Rating} from 'react-native-rating-element'
+import FastImg from 'react-native-fast-image'
 import styled from 'styled-components'
 
-const wWidth = Dimensions.get('window').width / 4
+const wWidth = Math.round(Dimensions.get('window').width / 4)
 
 export default function MainPopularMovieList({item, navigation}) {
   return (
@@ -11,7 +12,7 @@ export default function MainPopularMovieList({item, navigation}) {
       onPress={() => {
         navigation.navigate('DetailPage', {id: item.id})
       }}>
-      <Image
+      <FastImg
         style={{
           width: wWidth,
           height: wWidth * 1.5,
@@ -22,7 +23,7 @@ export default function MainPopularMovieList({item, navigation}) {
       <Title numberOfLines={1}>{item.title}</Title>
       <Row>
         <Rating
-          size={14}
+          size={12}
           rated={item.vote_average / 2}
           readonly={true}
           ratingBackgroundColor="#4f4f50"
@@ -48,13 +49,14 @@ const Title = styled.Text`
 `
 
 const Row = styled.View`
+  width: ${wWidth}px;
   flex-direction: row;
   justify-content: space-between;
 `
 
 const Card = styled.TouchableOpacity`
-  width: ${wWidth}px;
   overflow: hidden;
+  width: ${wWidth}px;
   margin-right: 10px;
   border-radius: 5px;
 `

@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import Overview from './Overview'
 import Credits from './Credits'
 import SimilarMovie from './SimilarMovie'
-import ScrollTopButton from './DetailScrollTopButton'
+import ScrollTopButton from '../ScrollTopButton'
 
 export default function Detail({data, navigation}) {
   console.log('디테일', data)
@@ -119,7 +119,7 @@ const MovieTitle = styled.Text`
 const Column = styled.View`
   flex-direction: column;
   flex: 1;
-  margin: 70px 0 0 10px;
+  margin: 55px 0 0 10px;
 `
 
 const Row = styled.View`
@@ -129,7 +129,7 @@ const Row = styled.View`
 const AbsoluteBox = styled.View`
   flex-direction: row;
   position: absolute;
-  top: -50px;
+  top: -40px;
   left: 10px;
 `
 

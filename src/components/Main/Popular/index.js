@@ -10,7 +10,10 @@ export default function Popular({popularMovieList, navigation}) {
     <Container>
       <Row>
         <Title>인기 영화</Title>
-        <MoreButton>
+        <MoreButton
+          onPress={() => {
+            navigation.navigate('ListDetailPage', {category: 'popular'})
+          }}>
           <Icon
             style={{
               textAlign: 'center',

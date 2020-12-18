@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Icon from 'react-native-vector-icons/AntDesign'
 
-export default function DetailScrollTopButton({onScrollToTop}) {
+export default function ScrollTopButton({onScrollToTop}) {
   return (
     <Container onPress={onScrollToTop}>
       <Icon name="arrowup" size={25} color="#505050" />
@@ -12,7 +12,7 @@ export default function DetailScrollTopButton({onScrollToTop}) {
 
 const Container = styled.TouchableOpacity`
   position: absolute;
-  right: 30px;
+  right: 20px;
   bottom: 30px;
   z-index: 10;
   padding: 10px;

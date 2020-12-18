@@ -1,5 +1,6 @@
 import React from 'react'
-import {Image, Dimensions, TouchableOpacity} from 'react-native'
+import {Dimensions, TouchableOpacity} from 'react-native'
+import FastImg from 'react-native-fast-image'
 import styled from 'styled-components'
 
 const wWidth = Math.round(Dimensions.get('window').width / 3.5)
@@ -11,7 +12,7 @@ export default function SimilarMovieCardList({item, navigation}) {
         navigation.replace('DetailPage', {id: item.id})
       }}>
       <ImgWrap>
-        <Image
+        <FastImg
           style={{
             width: wWidth,
             height: wWidth * 1.5,

@@ -1,5 +1,7 @@
 import React from 'react'
-import {Image, Dimensions} from 'react-native'
+import {Dimensions} from 'react-native'
+import FastImg from 'react-native-fast-image'
+
 import styled from 'styled-components'
 
 const wWidth = Dimensions.get('window').width / 4
@@ -10,7 +12,7 @@ export default function MovieList({item, navigation}) {
       onPress={() => {
         navigation.navigate('DetailPage', {id: item.id})
       }}>
-      <Image
+      <FastImg
         style={{
           width: wWidth,
           height: wWidth * 1.5,

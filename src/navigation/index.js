@@ -1,13 +1,11 @@
 import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
-import {
-  createBottomTabNavigator,
-  useBottomTabBarHeight,
-} from '@react-navigation/bottom-tabs'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import MainPage from '../screens/MainPage'
+import ListDetailPage from '../screens/ListDetailPage'
 import DetailPage from '../screens/DetailPage'
 
 import ListPage from '../screens/ListPage'
@@ -60,6 +58,7 @@ function StackNavigator() {
   return (
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="MainPage" component={TabNavigator} />
+      <Stack.Screen name="ListDetailPage" component={ListDetailPage} />
       <Stack.Screen name="DetailPage" component={DetailPage} />
     </Stack.Navigator>
   )

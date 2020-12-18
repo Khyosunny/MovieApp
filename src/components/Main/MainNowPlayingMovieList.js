@@ -1,6 +1,6 @@
 import React from 'react'
-import {View, Text, Image, TouchableOpacity} from 'react-native'
-import {Rating} from 'react-native-rating-element'
+import {View, TouchableOpacity} from 'react-native'
+import FastImg from 'react-native-fast-image'
 import styled from 'styled-components'
 
 export default function MainNowPlayingMovieList({item, navigation}) {
@@ -17,7 +17,7 @@ export default function MainNowPlayingMovieList({item, navigation}) {
         style={{
           backgroundColor: '#15161d',
         }}>
-        <Image
+        <FastImg
           style={{
             opacity: 0.8,
             width: '100%',
