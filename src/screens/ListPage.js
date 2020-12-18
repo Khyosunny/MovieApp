@@ -1,9 +1,32 @@
-import React from 'react';
-import List from '../components/List/List';
+import React, {useEffect} from 'react'
+import {loadingStart, getData} from '../common/list'
+import {useSelector, useDispatch, shallowEqual} from 'react-redux'
 
-export default function ListPage() {
+import LoadingPage from '../components/Loading/Loading'
+import List from '../components/List'
+import fetchListData from '../util/listApi'
 
-  return (
-    <List />
+export default function ListPage({navigation}) {
+  const {loading, data} = useSelector((state) => state.list, shallowEqual)
+  const dispatch = useDispatch()
+
+  const fetchDatas = async () => {
+    dispatch(loadingStart())
+    try {
+      const result = await fetchListData()
+      dispatch(getData(result))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    fetchDatas()
+  }, [])
+
+  return loading ? (
+    <LoadingPage />
+  ) : (
+    <List data={data} navigation={navigation} />
   )
 }

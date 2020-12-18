@@ -1,50 +1,40 @@
-import React, {useState, useCallback, useRef} from 'react'
-import {Text, Image, Dimensions, ScrollView} from 'react-native'
+import React, {useCallback, useRef} from 'react'
+import {Image, ScrollView} from 'react-native'
 import {Rating} from 'react-native-rating-element'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import LeftIcon from 'react-native-vector-icons/AntDesign'
-import MoreIcon from 'react-native-vector-icons/MaterialIcons'
 import styled from 'styled-components'
 
-import Character from './DetailCharacter'
-import SimilarMovie from './DetailSimilarMovie'
+import Overview from './Overview'
+import Credits from './Credits'
+import SimilarMovie from './SimilarMovie'
 import ScrollTopButton from './DetailScrollTopButton'
 
-const wWidth = Math.round((Dimensions.get('window').width - 40) / 4)
-
 export default function Detail({data, navigation}) {
+  console.log('디테일', data)
   const scrollRef = useRef()
 
-  const scrollToTop = useCallback(() => {
+  const onScrollToTop = useCallback(() => {
     scrollRef.current?.scrollTo({
       y: 0,
       animated: true,
     })
   }, [])
 
-  const [showMoreButton, setShowMoreButton] = useState(false)
-  const [numOfLine, setNumOfLine] = useState(5)
-
-  const showMore = useCallback(() => {
-    setShowMoreButton(false)
-    setNumOfLine(100)
-  }, [])
-
-  const onTextLayout = useCallback(
-    (e) => {
-      setShowMoreButton(e.nativeEvent.lines.length >= numOfLine)
-    },
-    [numOfLine],
-  )
-  console.log('Detail', 'DDD')
   return (
     <>
-      <Container ref={scrollRef}>
+      <ScrollView
+        ref={scrollRef}
+        scrollEventThrottle={16}
+        contentContainerStyle={{
+          backgroundColor: '#15161d',
+          paddingHorizontal: 10,
+        }}>
         <Background>
           <ButtonBox>
             <Button
               onPress={() => {
-                navigation.pop()
+                navigation.goBack()
               }}>
               <LeftIcon name="left" size={30} color="#e9e9e9" />
             </Button>
@@ -93,75 +83,17 @@ export default function Detail({data, navigation}) {
           </AbsoluteBox>
         </PosterLayout>
 
-        <Layout>
-          <SubTitle>줄거리</SubTitle>
-          <Overview numberOfLines={numOfLine} onTextLayout={onTextLayout}>
-            {data.detail.overview}
-          </Overview>
-
-          {showMoreButton && (
-            <ShowMoreButton onPress={showMore}>
-              <Row>
-                <Text
-                  style={{
-                    textAlign: 'center',
-                    fontSize: 14,
-                    color: '#8375ff',
-                  }}>
-                  더보기
-                </Text>
-                <MoreIcon name="expand-more" size={20} color="#8375ff" />
-              </Row>
-            </ShowMoreButton>
-          )}
-        </Layout>
-
-        <Layout>
-          <SubTitle>등장 인물</SubTitle>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            snapToInterval={wWidth + 20}>
-            {data.credits.map((item) => (
-              <Character key={item.order} item={item} />
-            ))}
-          </ScrollView>
-        </Layout>
-
-        <Layout>
-          <SubTitle>추천 영화</SubTitle>
-          <Row justifyContent="space-between">
-            {data.similarMovie.map((item) => (
-              <SimilarMovie key={item.id} item={item} navigation={navigation} />
-            ))}
-          </Row>
-        </Layout>
-      </Container>
-      <ScrollTopButton scrollToTop={scrollToTop} />
+        <Overview overview={data.detail.overview} />
+        <Credits credits={data.credits} />
+        <SimilarMovie
+          similarMovie={data.similarMovie}
+          navigation={navigation}
+        />
+      </ScrollView>
+      <ScrollTopButton onScrollToTop={onScrollToTop} />
     </>
   )
 }
-
-const IMG_URL = 'https://image.tmdb.org/t/p/original'
-
-const ShowMoreButton = styled.TouchableOpacity`
-  align-self: center;
-  padding: 10px;
-`
-const Overview = styled.Text`
-  font-size: 14px;
-  color: #c5c5c5;
-`
-
-const SubTitle = styled.Text`
-  font-size: 18px;
-  color: #e9e9e9;
-  margin-bottom: 10px;
-`
-
-const Layout = styled.View`
-  margin: 30px 10px 0;
-`
 
 const Infor = styled.Text`
   background-color: #2b2d3a;
@@ -193,7 +125,6 @@ const Column = styled.View`
 const Row = styled.View`
   flex-direction: row;
   flex-wrap: ${(props) => props.wrap || 'nowrap'};
-  justify-content: ${(props) => props.justifyContent || 'flex-start'};
 `
 const AbsoluteBox = styled.View`
   flex-direction: row;
@@ -222,7 +153,4 @@ const ButtonBox = styled.View`
   position: absolute;
   top: 10px;
   z-index: 5;
-`
-const Container = styled.ScrollView`
-  background-color: #15161d;
 `

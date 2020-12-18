@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import Icon from 'react-native-vector-icons/AntDesign'
 
-export default function DetailScrollTopButton({scrollToTop}) {
+export default function DetailScrollTopButton({onScrollToTop}) {
   return (
-    <Container onPress={scrollToTop}>
+    <Container onPress={onScrollToTop}>
       <Icon name="arrowup" size={25} color="#505050" />
     </Container>
   )

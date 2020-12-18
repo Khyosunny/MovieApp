@@ -3,8 +3,8 @@ import {useSelector, useDispatch, shallowEqual} from 'react-redux'
 
 import {loadingStart, getData} from '../common/detail'
 import LoadingPage from '../components/Loading/Loading'
-import Detail from '../components/Detail/Detail'
-import fetchData from '../util/detailApi'
+import Detail from '../components/Detail'
+import fetchDetailData from '../util/detailApi'
 
 export default function DetailPage({route, navigation}) {
   const {loading, data} = useSelector((state) => state.detail, shallowEqual)
@@ -14,10 +14,10 @@ export default function DetailPage({route, navigation}) {
   console.log('아뒤', id)
   const dispatch = useDispatch()
 
-  const fetchDatas = async () => {
+  const fetchDatas = async (num) => {
     dispatch(loadingStart())
     try {
-      const result = await fetchData(`${id}`)
+      const result = await fetchDetailData(num)
       dispatch(getData(result))
     } catch (e) {
       console.log(e)
@@ -25,7 +25,7 @@ export default function DetailPage({route, navigation}) {
   }
 
   useEffect(() => {
-    fetchDatas()
+    fetchDatas(id)
   }, [])
 
   if (loading) return <LoadingPage />

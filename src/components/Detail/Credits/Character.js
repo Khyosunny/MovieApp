@@ -1,10 +1,12 @@
 import React from 'react'
-import {View, Text, Image, Dimensions, ScrollView} from 'react-native'
+import {Image, Dimensions} from 'react-native'
 import styled from 'styled-components'
 
 const wWidth = Math.round((Dimensions.get('window').width - 40) / 4)
 
-export default function DetailCharacter({item}) {
+const EMPTY = 'https://ssl.pstatic.net/static/movie/2012/06/dft_img77x96_1.png'
+
+export default function Character({item}) {
   return (
     <Container>
       <ImgWrap>
@@ -13,7 +15,12 @@ export default function DetailCharacter({item}) {
             width: wWidth,
             height: wWidth,
           }}
-          source={{uri: `${IMG_URL}${item.profile_path}`}}
+          source={{
+            uri:
+              item.profile_path === null
+                ? `${EMPTY}`
+                : `${IMG_URL}${item.profile_path}`,
+          }}
         />
       </ImgWrap>
       <NameWrap>

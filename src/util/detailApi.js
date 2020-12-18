@@ -53,7 +53,7 @@ async function fetchSimilarMovie(id) {
   return data
 }
 
-export default async function fetchData(id) {
+export default async function fetchDetailData(id) {
   let data = {}
   const detail = await fetchDetail(id)
   const credits = await fetchCredits(id)
@@ -61,6 +61,5 @@ export default async function fetchData(id) {
   data.detail = detail
   data.credits = credits
   data.similarMovie = similarMovie
-  console.log(data)
   return data
 }

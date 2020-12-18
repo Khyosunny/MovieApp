@@ -1,6 +1,9 @@
 import React from 'react'
+import {Dimensions, Image} from 'react-native'
 import {Rating} from 'react-native-rating-element'
 import styled from 'styled-components'
+
+const wWidth = Dimensions.get('window').width / 4
 
 export default function MainPopularMovieList({item, navigation}) {
   return (
@@ -8,8 +11,12 @@ export default function MainPopularMovieList({item, navigation}) {
       onPress={() => {
         navigation.navigate('DetailPage', {id: item.id})
       }}>
-      <Img
-        resizeMode="contain"
+      <Image
+        style={{
+          width: wWidth,
+          height: wWidth * 1.5,
+          borderRadius: 5,
+        }}
         source={{uri: `${IMG_URL}${item.poster_path}`}}
       />
       <Title numberOfLines={1}>{item.title}</Title>
@@ -45,15 +52,9 @@ const Row = styled.View`
   justify-content: space-between;
 `
 
-const Img = styled.Image`
-  width: 105px;
-  height: 158px;
-  border-radius: 15px;
-`
-
 const Card = styled.TouchableOpacity`
-  width: 105px;
-  height: 210px;
+  width: ${wWidth}px;
+  overflow: hidden;
   margin-right: 10px;
   border-radius: 5px;
 `

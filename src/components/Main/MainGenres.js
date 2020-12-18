@@ -30,34 +30,37 @@ const type = [
   },
 ]
 
-export default function MainCategory() {
+export default function MainGenres() {
   return (
     <ScrollView
+      contentContainerStyle={{
+        paddingTop: 30,
+      }}
       horizontal
       scrollEventThrottle={16}
       snapToInterval={100}
       showsHorizontalScrollIndicator={false}>
       {type.map((item) => (
-        <CateBtn key={item.key} style={{}}>
-          <CateText
+        <GenresBtn key={item.key}>
+          <Genre
             style={{
               color: `${item.color}`,
             }}>
             {item.label}
-          </CateText>
-        </CateBtn>
+          </Genre>
+        </GenresBtn>
       ))}
     </ScrollView>
   )
 }
 
-const CateText = styled.Text`
+const Genre = styled.Text`
   font-size: 14px;
   font-weight: bold;
   color: #fff;
 `
 
-const CateBtn = styled.TouchableOpacity`
+const GenresBtn = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: center;

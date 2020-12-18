@@ -3,7 +3,7 @@ import {useSelector, useDispatch, shallowEqual} from 'react-redux'
 import {loadingStart, getData} from '../common/main'
 
 import LoadingPage from '../components/Loading/Loading'
-import Main from '../components/Main/Main'
+import Main from '../components/Main'
 import {fetchData} from '../util/api'
 
 export default function MainPage({navigation}) {
