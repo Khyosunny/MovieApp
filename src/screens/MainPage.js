@@ -21,10 +21,7 @@ export default function MainPage({navigation}) {
       const result = await fetchData(lists)
       let popular = await result.popular.filter((item) => item.overview !== '')
       popular = popular.slice(0, 10)
-      let nowPlaying = await result.now_playing.filter(
-        (item) => item.overview !== '',
-      )
-      nowPlaying = nowPlaying.slice(0, 5)
+      let nowPlaying = await result.now_playing.slice(0, 5)
       dispatch(getData(popular, nowPlaying))
     } catch (e) {
       console.log(e)

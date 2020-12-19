@@ -48,7 +48,11 @@ function TabNavigator() {
       }}>
       <Tab.Screen name="홈" component={MainPage} />
       <Tab.Screen name="영화" component={ListPage} />
-      <Tab.Screen name="검색" component={SearchPage} />
+      <Tab.Screen
+        name="검색"
+        component={SearchPage}
+        options={{unmountOnBlur: true}}
+      />
       <Tab.Screen name="좋아요" component={LikePage} />
     </Tab.Navigator>
   )

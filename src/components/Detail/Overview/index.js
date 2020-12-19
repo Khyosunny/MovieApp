@@ -24,9 +24,13 @@ export default function Overview({overview}) {
     <Container>
       <SubTitle title="줄거리" />
 
-      <OverviewText numberOfLines={numOfLine} onTextLayout={onTextLayout}>
-        {overview}
-      </OverviewText>
+      {overview ? (
+        <OverviewText numberOfLines={numOfLine} onTextLayout={onTextLayout}>
+          {overview}
+        </OverviewText>
+      ) : (
+        <EmptyOverviewText>줄거리 정보가 없습니다.</EmptyOverviewText>
+      )}
 
       {showMoreButton && (
         <ShowMoreButton onPress={onShowMore}>
@@ -55,6 +59,13 @@ const ShowMoreButton = styled.TouchableOpacity`
   align-self: center;
   padding: 10px;
 `
+const EmptyOverviewText = styled.Text`
+  margin: 20px 0;
+  align-self: center;
+  font-size: 16px;
+  color: #c5c5c5;
+`
+
 const OverviewText = styled.Text`
   font-size: 14px;
   color: #c5c5c5;
