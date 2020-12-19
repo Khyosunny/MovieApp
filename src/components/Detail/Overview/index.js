@@ -21,7 +21,7 @@ export default function Overview({overview}) {
   )
 
   return (
-    <>
+    <Container>
       <SubTitle title="줄거리" />
 
       <OverviewText numberOfLines={numOfLine} onTextLayout={onTextLayout}>
@@ -43,7 +43,7 @@ export default function Overview({overview}) {
           </Row>
         </ShowMoreButton>
       )}
-    </>
+    </Container>
   )
 }
 
@@ -58,4 +58,7 @@ const ShowMoreButton = styled.TouchableOpacity`
 const OverviewText = styled.Text`
   font-size: 14px;
   color: #c5c5c5;
+`
+const Container = styled.View`
+  margin: 0 10px;
 `

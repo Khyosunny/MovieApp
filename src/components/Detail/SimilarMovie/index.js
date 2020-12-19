@@ -6,7 +6,7 @@ import SimilarMovieCardList from './SimilarMovieCardList'
 
 export default function SimilarMovie({similarMovie, navigation}) {
   return (
-    <>
+    <Container>
       <SubTitle title="추천 영화" />
 
       <Row>
@@ -22,7 +22,7 @@ export default function SimilarMovie({similarMovie, navigation}) {
           ))
         )}
       </Row>
-    </>
+    </Container>
   )
 }
 
@@ -38,4 +38,7 @@ const EmptyMovie = styled.Text`
   text-align: center;
   line-height: 80px;
   font-size: 14px;
+`
+const Container = styled.View`
+  margin: 0 10px;
 `

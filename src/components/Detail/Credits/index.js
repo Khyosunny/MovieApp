@@ -9,7 +9,7 @@ const wWidth = Math.round((Dimensions.get('window').width - 40) / 4)
 
 export default function Credits({credits}) {
   return (
-    <>
+    <Container>
       <SubTitle title="등장 인물" />
       <ScrollView
         horizontal
@@ -19,6 +19,10 @@ export default function Credits({credits}) {
           <Character key={item.order} item={item} />
         ))}
       </ScrollView>
-    </>
+    </Container>
   )
 }
+
+const Container = styled.View`
+  margin: 0 10px;
+`

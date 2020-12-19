@@ -1,6 +1,6 @@
 # MovieApp(React Native)
 
--2020.12.19일 현재 진행 중-
+-2020.12.20일 현재 진행 중-
 
 ## TMDB의 영화 open restAPI를 사용한 영화 소개 앱 입니다.
 
@@ -38,6 +38,6 @@ Adobe XD로 작업한 디자인 이미지 입니다.
 
 플로우 차트
 
-![MovieApp_design2](https://user-images.githubusercontent.com/71235165/102636105-91634000-4197-11eb-8429-078a45b08cff.PNG)
+![MovieApp_design2](https://user-images.githubusercontent.com/71235165/102698052-07da6d80-427e-11eb-9173-88752d2586d5.PNG)
 
 ---

@@ -28,7 +28,6 @@ export default function Detail({data, navigation}) {
         scrollEventThrottle={16}
         contentContainerStyle={{
           backgroundColor: '#15161d',
-          paddingHorizontal: 10,
         }}>
         <Background>
           <ButtonBox>

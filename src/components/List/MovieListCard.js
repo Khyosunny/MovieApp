@@ -4,7 +4,7 @@ import FastImg from 'react-native-fast-image'
 
 import styled from 'styled-components'
 
-const wWidth = Dimensions.get('window').width / 4
+const wWidth = Math.round(Dimensions.get('window').width / 4)
 
 export default function MovieList({item, navigation}) {
   return (

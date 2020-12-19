@@ -4,14 +4,13 @@ import {useSelector, useDispatch, shallowEqual} from 'react-redux'
 import {loadingStart, getData} from '../common/listDetail'
 import LoadingPage from '../components/Loading/Loading'
 import ListDetail from '../components/ListDetail'
-import {api} from '../util/api'
+import fetchListDetailData from '../util/listDetailApi'
 
 export default function ListDetailPage({route, navigation}) {
   const {loading, data} = useSelector((state) => state.listDetail, shallowEqual)
   const dispatch = useDispatch()
 
-  const {category} = route.params
-  console.log(category)
+  const {category, genres, title} = route.params
 
   const pageTitle = {
     popular: '인기 영화',
@@ -23,17 +22,47 @@ export default function ListDetailPage({route, navigation}) {
   const fetchDatas = async () => {
     dispatch(loadingStart())
     try {
-      let result = await api.get(category)
-      result = result.data.results.filter((item) => item.overview !== '')
-      dispatch(getData(result))
-      console.log('result', result)
+      let listData = await fetchListDetailData(category)
+      listData = listData.data.results.filter((item) => item.overview !== '')
+      dispatch(getData(listData))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const fetchGerneData = async () => {
+    dispatch(loadingStart())
+    try {
+      let genreData = {}
+      for (let i = 1; i < 3; i++) {
+        let result = await fetchListDetailData(category, i)
+        result = result.data.results.filter((item) => item.overview !== '')
+        genreData[`${i}`] = result
+      }
+      genreData = genreData[1].concat(genreData[2])
+      const result = genreData.map((item) => {
+        const genreResult = item.genre_ids.filter((item) =>
+          genres.includes(item),
+        )
+        if (genreResult.length > 0) {
+          return item
+        } else {
+          return null
+        }
+      })
+      genreData = result.filter((item) => item !== null).slice(0, 15)
+      dispatch(getData(genreData))
     } catch (e) {
       console.log(e)
     }
   }
 
   useEffect(() => {
-    fetchDatas()
+    if (genres) {
+      fetchGerneData()
+    } else {
+      fetchDatas()
+    }
   }, [])
 
   return loading ? (
@@ -44,6 +73,7 @@ export default function ListDetailPage({route, navigation}) {
       navigation={navigation}
       pageTitle={pageTitle}
       category={category}
+      title={title}
     />
   )
 }

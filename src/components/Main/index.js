@@ -33,7 +33,7 @@ export default function Main({popularMovieList, nowMovieList, navigation}) {
         ))}
       </Swiper>
 
-      <Genres />
+      <Genres navigation={navigation} />
       <Popular popularMovieList={popularMovieList} navigation={navigation} />
     </Container>
   )

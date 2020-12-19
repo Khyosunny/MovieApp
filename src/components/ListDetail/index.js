@@ -1,5 +1,5 @@
 import React, {useRef, useCallback} from 'react'
-import {ScrollView, Dimensions} from 'react-native'
+import {ScrollView, Dimensions, View} from 'react-native'
 import LeftIcon from 'react-native-vector-icons/AntDesign'
 import FastImg from 'react-native-fast-image'
 import styled from 'styled-components'
@@ -7,7 +7,13 @@ import styled from 'styled-components'
 import ScrollTopButton from '../ScrollTopButton'
 const wWidth = Math.round(Dimensions.get('window').width / 3.5)
 
-export default function ListDetail({data, navigation, pageTitle, category}) {
+export default function ListDetail({
+  data,
+  navigation,
+  pageTitle,
+  category,
+  title,
+}) {
   const scrollRef = useRef()
 
   const onScrollToTop = useCallback(() => {
@@ -17,7 +23,7 @@ export default function ListDetail({data, navigation, pageTitle, category}) {
     })
   }, [])
   return (
-    <>
+    <View style={{backgroundColor: '#15161d', flex: 1}}>
       <ScrollView
         ref={scrollRef}
         contentContainerStyle={{
@@ -34,7 +40,7 @@ export default function ListDetail({data, navigation, pageTitle, category}) {
             }}>
             <LeftIcon name="left" size={30} color="#e9e9e9" />
           </Button>
-          <PageTitle>{pageTitle[category]}</PageTitle>
+          <PageTitle>{title ? title : pageTitle[category]}</PageTitle>
         </Row>
         <Row wrap>
           {data.map((item) => (
@@ -58,7 +64,7 @@ export default function ListDetail({data, navigation, pageTitle, category}) {
         </Row>
       </ScrollView>
       <ScrollTopButton onScrollToTop={onScrollToTop} />
-    </>
+    </View>
   )
 }
 
