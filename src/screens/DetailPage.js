@@ -24,6 +24,7 @@ export default function DetailPage({route, navigation}) {
 
   useEffect(() => {
     fetchDatas(id)
+    return () => fetchDatas(id)
   }, [])
 
   if (loading) return <LoadingPage />

@@ -46,7 +46,9 @@ export default function Detail({data, navigation}) {
 
   useEffect(() => {
     fetchLike()
-    return () => fetchLike()
+    return () => {
+      fetchLike()
+    }
   }, [])
   return (
     <>

@@ -1,9 +1,11 @@
 import React from 'react'
-import {ScrollView} from 'react-native'
+import {ScrollView, Dimensions} from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import styled from 'styled-components'
 
 import PopularMovieList from './MainPopularMovieList'
+
+const wWidth = Math.round(Dimensions.get('window').width / 4)
 
 export default function Popular({popularMovieList, navigation}) {
   return (
@@ -27,7 +29,7 @@ export default function Popular({popularMovieList, navigation}) {
       <ScrollView
         horizontal
         scrollEventThrottle={16}
-        snapToInterval={115}
+        snapToInterval={wWidth + 10}
         showsHorizontalScrollIndicator={false}>
         {popularMovieList.map((item) => (
           <PopularMovieList key={item.id} item={item} navigation={navigation} />

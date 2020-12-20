@@ -40,17 +40,14 @@ export default function ListDetailPage({route, navigation}) {
         genreData[`${i}`] = result
       }
       genreData = genreData[1].concat(genreData[2])
+
       const result = genreData.map((item) => {
         const genreResult = item.genre_ids.filter((item) =>
           genres.includes(item),
         )
-        if (genreResult.length > 0) {
-          return item
-        } else {
-          return null
-        }
+        if (genreResult.length > 0) return item
       })
-      genreData = result.filter((item) => item !== null).slice(0, 15)
+      genreData = result.filter((item) => item !== undefined).slice(0, 15)
       dispatch(getData(genreData))
     } catch (e) {
       console.log(e)
