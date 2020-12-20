@@ -53,7 +53,11 @@ function TabNavigator() {
         component={SearchPage}
         options={{unmountOnBlur: true}}
       />
-      <Tab.Screen name="좋아요" component={LikePage} />
+      <Tab.Screen
+        name="좋아요"
+        component={LikePage}
+        options={{unmountOnBlur: true}}
+      />
     </Tab.Navigator>
   )
 }

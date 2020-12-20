@@ -1,8 +1,9 @@
-import React, {useCallback, useRef} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {Image, ScrollView} from 'react-native'
 import {Rating} from 'react-native-rating-element'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import LeftIcon from 'react-native-vector-icons/AntDesign'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import styled from 'styled-components'
 
 import Overview from './Overview'
@@ -11,7 +12,6 @@ import SimilarMovie from './SimilarMovie'
 import ScrollTopButton from '../ScrollTopButton'
 
 export default function Detail({data, navigation}) {
-  console.log('디테일', data)
   const scrollRef = useRef()
 
   const onScrollToTop = useCallback(() => {
@@ -21,6 +21,33 @@ export default function Detail({data, navigation}) {
     })
   }, [])
 
+  const [like, setLike] = useState(null)
+
+  const toggleLike = async (value) => {
+    try {
+      const newLike = await AsyncStorage.getItem(`${data.detail.id}`)
+      if (newLike !== null) {
+        await AsyncStorage.removeItem(`${data.detail.id}`)
+        setLike(false)
+      } else {
+        const jsonValue = JSON.stringify(value)
+        await AsyncStorage.setItem(`${data.detail.id}`, jsonValue)
+        setLike(true)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const fetchLike = async () => {
+    const result = await AsyncStorage.getItem(`${data.detail.id}`)
+    setLike(result !== null)
+  }
+
+  useEffect(() => {
+    fetchLike()
+    return () => fetchLike()
+  }, [])
   return (
     <>
       <ScrollView
@@ -37,8 +64,15 @@ export default function Detail({data, navigation}) {
               }}>
               <LeftIcon name="left" size={30} color="#e9e9e9" />
             </Button>
-            <Button>
-              <MaterialIcon name="heart-outline" size={30} color="tomato" />
+            <Button
+              onPress={() => {
+                toggleLike(data.detail)
+              }}>
+              {like ? (
+                <MaterialIcon name="heart" size={30} color="tomato" />
+              ) : (
+                <MaterialIcon name="heart-outline" size={30} color="tomato" />
+              )}
             </Button>
           </ButtonBox>
           <Image
