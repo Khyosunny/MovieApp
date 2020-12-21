@@ -1,4 +1,4 @@
-package com.movieapp;
+package com.khyosunny.movieapp;
 
 import android.app.Application;
 import android.content.Context;
